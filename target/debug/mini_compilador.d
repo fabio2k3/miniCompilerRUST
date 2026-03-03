@@ -1,1 +1,0 @@
-/home/fabio2k3/MyProjects/miniCompilerRUST/target/debug/mini_compilador: /home/fabio2k3/MyProjects/miniCompilerRUST/codegen.rs /home/fabio2k3/MyProjects/miniCompilerRUST/lexer.rs /home/fabio2k3/MyProjects/miniCompilerRUST/main.rs /home/fabio2k3/MyProjects/miniCompilerRUST/parser.rs /home/fabio2k3/MyProjects/miniCompilerRUST/semantic.rs

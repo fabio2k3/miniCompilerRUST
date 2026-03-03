@@ -139,11 +139,15 @@ impl REPL {
 
         self.semantic.analyze(&statements)?;
 
+        // Add new statements to accumulated statements
         for stmt in statements {
             self.all_statements.push(stmt);
         }
 
+        // Generate code for ALL statements (needed for cross-references)
         self.codegen.generate(&self.all_statements);
+        
+        // Execute the generated code
         self.codegen.execute()?;
 
         Ok(())
