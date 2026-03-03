@@ -32,6 +32,7 @@ pub struct CodeGenerator {
     temp_counter: usize,
     label_counter: usize,
     memory: HashMap<String, f64>,
+    last_executed_count: usize,
 }
 
 impl CodeGenerator {
@@ -41,6 +42,7 @@ impl CodeGenerator {
             temp_counter: 0,
             label_counter: 0,
             memory: HashMap::new(),
+            last_executed_count: 0,
         }
     }
 
@@ -197,8 +199,9 @@ impl CodeGenerator {
     }
 
     pub fn execute(&mut self) -> Result<(), String> {
-        self.memory.clear();
-        let mut pc = 0; // Program counter
+        // Don't clear memory - preserve state across executions
+        let start_pc = self.last_executed_count;
+        let mut pc = start_pc;
         let mut labels: HashMap<String, usize> = HashMap::new();
 
         // First pass: collect labels
@@ -208,7 +211,7 @@ impl CodeGenerator {
             }
         }
 
-        // Second pass: execute instructions
+        // Second pass: execute only new instructions
         while pc < self.instructions.len() {
             let inst = &self.instructions[pc].clone();
 
@@ -278,6 +281,9 @@ impl CodeGenerator {
                 }
             }
         }
+
+        // Update the count of executed instructions
+        self.last_executed_count = self.instructions.len();
 
         Ok(())
     }
