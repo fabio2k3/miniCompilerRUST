@@ -1,0 +1,11 @@
+[package]
+name = "mini_compilador"
+version = "1.0.0"
+edition = "2021"
+authors = ["Tu Nombre"]
+
+[dependencies]
+
+[[bin]]
+name = "mini_compilador"
+path = "main.rs"
